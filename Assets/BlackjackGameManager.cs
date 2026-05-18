@@ -1,9 +1,22 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class BlackjackGameManager : MonoBehaviour
 {
     public enum GameState { WaitingForBet, PlayerTurn, DealerTurn, RoundOver }
+
+    // Audio/VFX hooks — AudioManager and VFXManager subscribe to these automatically
+    public event Action OnCardDealt;
+    public event Action OnCardFlipped;
+    public event Action OnBetPlaced;
+    public event Action OnButtonClick;
+    public event Action OnDoubleDown;
+    public event Action OnPlayerWin;
+    public event Action OnBlackjack;
+    public event Action OnPlayerLose;
+    public event Action OnBust;
+    public event Action OnPush;
 
     [Header("References")]
     public BlackjackDeck deck;
@@ -44,6 +57,7 @@ public class BlackjackGameManager : MonoBehaviour
         if (amount > playerChips || amount < minBet) return;
         currentBet = amount;
         playerChips -= amount;
+        OnBetPlaced?.Invoke();
         StartCoroutine(DealInitialCards());
     }
 
@@ -68,6 +82,7 @@ public class BlackjackGameManager : MonoBehaviour
         if (playerHand.IsBlackjack())
         {
             ui.ShowMessage("Blackjack!");
+            OnBlackjack?.Invoke();
             yield return new WaitForSeconds(1f);
             StartCoroutine(DealerTurn());
         }
@@ -79,12 +94,14 @@ public class BlackjackGameManager : MonoBehaviour
         card.isFaceUp = faceUp;
         hand.AddCard(card);
         cardLayout.PlaceCard(card, isPlayer);
+        OnCardDealt?.Invoke();
         yield return new WaitForSeconds(0.3f);
     }
 
     public void PlayerHit()
     {
         if (currentState != GameState.PlayerTurn) return;
+        OnButtonClick?.Invoke();
         StartCoroutine(PlayerHitRoutine());
     }
 
@@ -97,6 +114,7 @@ public class BlackjackGameManager : MonoBehaviour
         if (playerHand.IsBust())
         {
             ui.ShowMessage("Bust! You lose.");
+            OnBust?.Invoke();
             yield return new WaitForSeconds(1.5f);
             EndRound(playerWon: false, push: false);
         }
@@ -109,6 +127,7 @@ public class BlackjackGameManager : MonoBehaviour
     public void PlayerStand()
     {
         if (currentState != GameState.PlayerTurn) return;
+        OnButtonClick?.Invoke();
         ui.ShowActionButtons(false);
         StartCoroutine(DealerTurn());
     }
@@ -122,7 +141,7 @@ public class BlackjackGameManager : MonoBehaviour
         playerChips -= currentBet;
         currentBet *= 2;
         ui.UpdateState(null, playerChips, currentBet);
-
+        OnDoubleDown?.Invoke();
         StartCoroutine(DoubleDownRoutine());
     }
 
@@ -136,6 +155,7 @@ public class BlackjackGameManager : MonoBehaviour
         if (playerHand.IsBust())
         {
             ui.ShowMessage("Bust! You lose.");
+            OnBust?.Invoke();
             yield return new WaitForSeconds(1.5f);
             EndRound(playerWon: false, push: false);
         }
@@ -171,6 +191,7 @@ public class BlackjackGameManager : MonoBehaviour
         foreach (var card in dealerHand.Cards)
             card.isFaceUp = true;
         cardLayout.FlipAllDealerCards();
+        OnCardFlipped?.Invoke();
     }
 
     void ResolveRound()
@@ -183,32 +204,38 @@ public class BlackjackGameManager : MonoBehaviour
         if (dealerBJ && playerBJ)
         {
             ui.ShowMessage("Push — both Blackjack!");
+            OnPush?.Invoke();
             EndRound(playerWon: false, push: true);
         }
         else if (playerBJ)
         {
             ui.ShowMessage("Blackjack! You win 3:2!");
+            OnBlackjack?.Invoke();
             playerChips += Mathf.RoundToInt(currentBet * 2.5f);
             EndRound(playerWon: true, push: false, skipChips: true);
         }
         else if (dealerBJ || (!playerBJ && dealerVal > playerVal && !dealerHand.IsBust()))
         {
             ui.ShowMessage("Dealer wins.");
+            OnPlayerLose?.Invoke();
             EndRound(playerWon: false, push: false);
         }
         else if (dealerHand.IsBust() || playerVal > dealerVal)
         {
             ui.ShowMessage("You win!");
+            OnPlayerWin?.Invoke();
             EndRound(playerWon: true, push: false);
         }
         else if (playerVal == dealerVal)
         {
             ui.ShowMessage("Push!");
+            OnPush?.Invoke();
             EndRound(playerWon: false, push: true);
         }
         else
         {
             ui.ShowMessage("Dealer wins.");
+            OnPlayerLose?.Invoke();
             EndRound(playerWon: false, push: false);
         }
     }
