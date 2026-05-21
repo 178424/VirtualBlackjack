@@ -36,28 +36,22 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\BlackjackHand.cs" />
      <Compile Include="Assets\Scripts\Scripts_\OpenBook.cs" />
      <Compile Include="Assets\Scripts\BlackjackCard.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Conditions\OnTimedInterval.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Actions\SetParticleRate.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Actions\PlayAnimation.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Testing\TeleportAnchorWithFade.cs" />
-     <Compile Include="Assets\VRBetChip.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Testing\TeleportAreaWithFade.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Actions\SetLightColor.cs" />
-     <Compile Include="Assets\BlackjackGameManager.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Controls\XRSlider.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Testing\Notes.cs" />
-     <Compile Include="Assets\BlackjackDeck.cs" />
-     <Compile Include="Assets\CardLayoutManager.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Actions\ScaleObject.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Actions\ApplyPhysics.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Conditions\OnPull.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Controls\XRButton.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Actions\SpawnFromList.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Controls\XRJoystick.cs" />
-     <Compile Include="Assets\BlackjackUI.cs" />
      <Compile Include="Assets\Scripts\CardLayoutManager.cs" />
      <Compile Include="Assets\Scripts\BlackjackGameManager.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Actions\RotateObject.cs" />
@@ -83,9 +77,7 @@
      <Compile Include="Assets\Scripts\Scripts_\Actions\ToggleInterface.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Actions\ChangeMaterial.cs" />
      <Compile Include="Assets\Scripts\CardVisual.cs" />
-     <Compile Include="Assets\BlackjackCard.cs" />
      <Compile Include="Assets\Scripts\Scripts_\rotate.cs" />
-     <Compile Include="Assets\CardVisual.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Testing\DisplayFPS.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Actions\FadeCanvasOnOverlap.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Actions\ToggleVisibility.cs" />
@@ -100,7 +92,6 @@
      <Compile Include="Assets\Scripts\Scripts_\Actions\SetLightIntensity.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Actions\ConvertValueToHue.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Actions\SpawnObject.cs" />
-     <Compile Include="Assets\EffectsManager.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Actions\StickToObject.cs" />
      <Compile Include="Assets\Scripts\VRBetChip.cs" />
      <Compile Include="Assets\Scripts\EffectsManager.cs" />
@@ -114,7 +105,6 @@
      <Compile Include="Assets\Scripts\Scripts_\Conditions\OnVelocity.cs" />
      <Compile Include="Assets\Scripts\Scripts_\ClockController.cs" />
      <Compile Include="Assets\Scripts\BlackjackDeck.cs" />
-     <Compile Include="Assets\AudioManager.cs" />
      <Compile Include="Assets\Scripts\Scripts_\Actions\DestroyObject.cs" />
      <Compile Include="Assets\Scripts\UIManagerVR.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

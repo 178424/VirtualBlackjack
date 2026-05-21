@@ -74,6 +74,18 @@ public class UIManagerVR : MonoBehaviour
         MostrarGameOver("Te rendiste.");
     }
 
+    public void OnBtnRestartClicked()
+{
+    Debug.Log("Reiniciando el juego...");
+    
+    // 1. Restablecer los datos simulados (Mock Data) a sus valores iniciales
+    mockScore = 1000;
+    mockApuesta = 50;
+    
+    // 2. Volver a cargar el panel de juego para iniciar una nueva partida
+    MostrarPanelJuego();
+}
+
     // --- ACTUALIZACIÓN DE DATOS ---
     public void ActualizarUIJuego()
     {
